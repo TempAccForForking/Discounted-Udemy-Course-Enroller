@@ -1,0 +1,33 @@
+name: Run CLI every 24 hours
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at midnight every day
+
+jobs:
+  run-cli:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Update settings file
+      run: |
+        jq '.email = "${{ secrets.UDEMY_EMAIL }}" | .password = "${{ secrets.UDEMY_PASSWORD }}" | .languages.Arabic = false | .languages.Chinese = false | .languages.Dutch = false | .languages.French = false | .languages.German = false | .languages.Indonesian = false | .languages.Italian = false | .languages.Japanese = false | .languages.Korean = false | .languages.Nepali = false | .languages.Polish = false | .languages.Portuguese = false | .languages.Romanian = false | .languages.Russian = false | .languages.Spanish = false | .languages.Thai = false | .languages.Turkish = false | .languages.Urdu = false' duce-cli-settings.json > tmp.json && mv tmp.json duce-cli-settings.json
+
+    - name: Install jq
+      run: sudo apt-get install -y jq
+
+    - name: Run CLI script
+      run: python cli.py
