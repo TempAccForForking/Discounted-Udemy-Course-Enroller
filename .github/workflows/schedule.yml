@@ -3,7 +3,8 @@ name: Run CLI every 24 hours
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs at midnight every day
-
+  workflow_dispatch:  # Allows manual trigger
+  
 jobs:
   run-cli:
     runs-on: ubuntu-latest
