@@ -25,7 +25,7 @@ jobs:
 
     - name: Update settings file
       run: |
-        jq '.email = "${{ secrets.UDEMY_EMAIL }}" | .password = "${{ secrets.UDEMY_PASSWORD }}" | .languages.Arabic = false | .languages.Chinese = false | .languages.Dutch = false | .languages.French = false | .languages.German = false | .languages.Indonesian = false | .languages.Italian = false | .languages.Japanese = false | .languages.Korean = false | .languages.Nepali = false | .languages.Polish = false | .languages.Portuguese = false | .languages.Romanian = false | .languages.Russian = false | .languages.Spanish = false | .languages.Thai = false | .languages.Turkish = false | .languages.Urdu = false' duce-cli-settings.json > tmp.json && mv tmp.json duce-cli-settings.json
+        jq '.email = "${{ secrets.UDEMY_EMAIL }}" | .password = "${{ secrets.UDEMY_PASSWORD }}" | .sites["Course Vania"] = false | .languages.Arabic = false | .languages.Chinese = false | .languages.Dutch = false | .languages.French = false | .languages.German = false | .languages.Indonesian = false | .languages.Italian = false | .languages.Japanese = false | .languages.Korean = false | .languages.Nepali = false | .languages.Polish = false | .languages.Portuguese = false | .languages.Romanian = false | .languages.Russian = false | .languages.Spanish = false | .languages.Thai = false | .languages.Turkish = false | .languages.Urdu = false' duce-cli-settings.json > tmp.json && mv tmp.json duce-cli-settings.json
 
     - name: Install jq
       run: sudo apt-get install -y jq
