@@ -12,23 +12,30 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+    - name: Debug - Checked out repository
+      run: echo "Checked out the repository"
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-
+    - name: Debug - Python set up
+      run: echo "Python set up"
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
+    - name: Debug - Dependencies installed
+      run: echo "Dependencies installed"
     - name: Update settings file
       run: |
         jq '.email = "${{ secrets.UDEMY_EMAIL }}" | .password = "${{ secrets.UDEMY_PASSWORD }}" | .sites["Course Vania"] = false | .languages.Arabic = false | .languages.Chinese = false | .languages.Dutch = false | .languages.French = false | .languages.German = false | .languages.Indonesian = false | .languages.Italian = false | .languages.Japanese = false | .languages.Korean = false | .languages.Nepali = false | .languages.Polish = false | .languages.Portuguese = false | .languages.Romanian = false | .languages.Russian = false | .languages.Spanish = false | .languages.Thai = false | .languages.Turkish = false | .languages.Urdu = false' duce-cli-settings.json > tmp.json && mv tmp.json duce-cli-settings.json
-
+    - name: Debug - Settings file updated
+      run: echo "Settings file updated"
     - name: Install jq
       run: sudo apt-get install -y jq
-
+    - name: Debug - jq installed
+      run: echo "jq installed"
     - name: Run CLI script
       run: python cli.py
+    - name: Debug - CLI script run
+      run: echo "CLI script run"
